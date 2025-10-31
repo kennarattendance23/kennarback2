@@ -1,0 +1,215 @@
+.report-scroll-wrapper {
+  height: calc(100vh - 20px); /* full height without touching sidebar */
+  overflow-y: auto;           /* enable vertical scroll */
+  overflow-x: hidden;         /* hide horizontal scroll */
+  scrollbar-width: thin;      /* thin scrollbar for Firefox */
+  scrollbar-color: transparent transparent; /* hidden scrollbar color */
+}
+
+/* Hide scrollbar in Chrome, Edge, Safari */
+.report-scroll-wrapper::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.report-container {
+  background-color: #e6f2ff;
+  padding: 30px;
+  border-radius: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+}
+
+.report-header {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.report-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.report-controls label,
+.report-controls span {
+  font-size: 16px;
+}
+
+.report-controls input[type="date"] {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 180px;
+  box-sizing: border-box;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  text-align: center;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.report-table th {
+  background-color: #59a5f0;
+  color: black;
+  padding: 10px;
+}
+
+.report-table td {
+  padding: 8px;
+  background-color: #b3d9ff;
+  text-align: center;
+}
+
+.report-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* ============================= */
+/* Pagination + Print Layout */
+/* ============================= */
+.pagination-print-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* move to right */
+  gap: 15px;
+  margin-top: 20px;
+}
+
+
+/* ✅ Added container to align entries-info (left) and pagination (right) */
+.pagination-footer {
+  display: flex;
+  justify-content: space-between; /* left and right corners */
+  align-items: center;
+  width: 100%;
+}
+
+/* Buttons group (pagination) */
+.buttons-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* move to right */
+  gap: 15px;
+}
+
+.page-buttonP,
+.page-buttonN{
+  background-color: #007bff;
+  border: 2px solid #f5f5f5;
+  border-radius: 8px;
+  padding: 6px 14px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.page-buttonP:hover,
+.page-buttonN:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.page-buttonP:disabled,
+.page-buttonN:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Centered Print Button */
+.print-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin-right: 250px;
+}
+
+.print-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Left corner text */
+.entries-info {
+  margin-right: 250px;
+  font-size: 1vw;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+.save-btn,
+.cancel-btn{
+  border-radius: 8px;
+  border: none;
+  background-color: #0078f8;
+  color: white;
+  cursor: pointer;
+  padding: 10px 10px;
+  transition: background-color 0.2s ease;
+  margin: 3px;
+}
+.save-btn:hover,
+.cancel-btn:hover{
+  background-color: #0056b3;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+
+/* ============================= */
+/* Table Borders */
+/* ============================= */
+.report-table th,
+.report-table td {
+  border: 1px solid #194979a2;
+}
+
+.report-table {
+  border: 1px solid #1b4672;
+  border-collapse: collapse;
+}
+
+.search-button{
+  border-radius: 8px;
+  border: none;
+  background-color: #0078f8;
+  color: white;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: background-color 0.2s ease;
+}
+
+.search-button:hover{
+  background-color: #0056b3;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.edit-btn:hover{
+  background-color: #0056b3;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}

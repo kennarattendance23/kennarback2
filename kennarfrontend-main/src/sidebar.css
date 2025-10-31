@@ -1,0 +1,84 @@
+/* Sidebar container */
+.sidebar {
+  width: 220px;
+  background-color: #87c4ff;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.sidebar-logo {
+  width: 175px;
+  height: 175px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Admin Name */
+.admin-name {
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #000;
+}
+
+/* Navigation */
+.sidebar nav {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 5px;
+}
+
+/* Button Style with Hover Animation */
+.sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 650;
+  padding: 14px 18px;
+  color: black;
+  text-decoration: none;
+  width: 100%;
+  background-color: #afcff7;
+  border-radius: 12px;
+  transition: background-color 0.25s ease, transform 0.3s ease;
+}
+
+/* Icon size fix */
+.sidebar-icon {
+  width: 20px;
+  height: 22px;
+}
+
+/* Moving hover effect */
+.sidebar a:hover {
+  background-color: #9fc3f9;
+  transform: translateX(5px) scale(1.03); /* Moves right 5px and slightly enlarges */
+}
+
+/* Active link color */
+.sidebar a.active {
+  background-color: #6da3f7;
+  color: white;
+  transform: none; /* Keep active links steady */
+}
+
+
+
+

@@ -1,0 +1,519 @@
+/* === Universal Reset & Fullscreen Wrapper === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+}
+
+.employee-scroll {
+  height: calc(100vh - 20px); /* full height without touching sidebar */
+  overflow-y: auto;           /* enable vertical scroll */
+  overflow-x: hidden;         /* hide horizontal scroll */
+  scrollbar-width: thin;      /* thin scrollbar for Firefox */
+  scrollbar-color: transparent transparent; /* hidden scrollbar color */
+}
+
+.employee-scroll::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+.employee-scroll .employee-container {
+  padding-right: 12px;
+  box-sizing: border-box;
+}
+
+/* === Employee Container Auto-Fit === */
+.employee-container {
+  background-color: #e6f2ff;
+  width: 95%;          /* auto-scale with screen */
+  max-width: 1200px;
+  min-height: 80vh;    /* fill most of the screen */
+  padding: 30px;
+  margin: 0 auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+  transition: all 0.3s ease; /* smooth resize */
+}
+
+/* === Header === */
+.employee-header {
+  font-size: 30px;
+  margin-bottom: 25px;
+}
+
+/* === Search === */
+.employee-search {
+  display: flex;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 20px;
+  justify-content: flex-end;
+}
+
+.employee-search input {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 250px;
+  max-width: 100%;
+  margin-right: 60px;
+}
+
+/* === Form === */
+.employee-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.employee-form-group {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  min-width: 200px;
+}
+
+.employee-form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.employee-form-group input,
+.employee-form-group select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* === Buttons === */
+.update-button,
+.cancel-button,
+.proceed-button {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.update-button {
+  background-color: #27ae60;
+  color: white;
+  margin-bottom: 5px;
+}
+
+.update-button:hover{
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+.cancel-button {
+  background-color: #bdc3c7;
+  color: black;
+}
+.cancel-button:hover{
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.proceed-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.proceed-button:hover {
+  background-color: #5fb1f0;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+
+/* === Employee Table === */
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  text-align: center;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.employee-table th,
+.employee-table td {
+  border: 1px solid #006eff;
+  background-color: #b3d9ff;
+  padding: 10px;
+  text-align: center;
+}
+
+.employee-table th {
+  background-color: #59a5f0;
+  color: black;
+  font-weight: bold;
+}
+
+.employee-table td.employee-actions,
+.employee-table td:last-child {
+  background-color: #b3d9ff;
+  padding: 5px;
+  vertical-align: top;
+}
+
+
+.employee-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.employee-actions .edit-btn,
+.employee-actions .delete-btn {
+  width: 90%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.edit-btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #2980b9;
+  color: white;
+}
+
+.delete-btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #676565b2;
+  color: white;
+}
+
+.delete-btn:hover{
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+
+/* === Pagination === */
+.pagination{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* move to right */
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* === Pagination container === */
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* move to right */
+  gap: 15px;
+}
+
+/* Info text */
+.pagination-info {
+  margin-right: 680px;
+  font-size: 1vw;
+}
+
+/* Wrapper for buttons */
+.pagination-controls {
+  display: flex;
+  gap: 8px; /* spacing between buttons */
+}
+
+/* Pagination buttons (pill-shaped) */
+.pagination-btn {
+  background-color: #007bff;
+  border: 2px solid #f5f5f5;
+  border-radius: 8px;
+  padding: 6px 14px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.pagination-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.pagination-btn:disabled{
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* === Modal === */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: linear-gradient(to bottom, #e0f0ff, #cce6ff);
+  padding: 25px 30px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  border: 1px solid #99ccff;
+}
+
+.modal-content h3 {
+  margin-bottom: 15px;
+  color: #0066cc;
+}
+
+.modal-content p {
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #000101;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-around;
+  gap: 50px;
+}
+
+.modal-actions .cancel-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.modal-actions .cancel-button:hover {
+  background-color: #0056b3;
+}
+
+.modal-actions .update-button {
+  background-color: #21c959;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.modal-actions .update-button:hover {
+  background-color: #1f944f;
+}
+
+.modal-actions .delete-btn {
+  background-color: #bdc3c7;
+  color: black;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.modal-actions .delete-btn:hover {
+  background-color: #a6a6a6;
+}
+
+/* === Hover effects for action buttons === */
+.employee-actions .edit-btn:hover {
+  background-color: #1c5980;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.employee-actions .delete-btn:hover {
+  background-color: #505050;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+
+/* === Button group for form === */
+.employee-form-group.button-group {
+  margin-top: 40px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* === Inputs alignment === */
+.employee-form-group select,
+.employee-form-group input[type="file"],
+.employee-form-group input[type="date"] {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 14px;
+}
+
+.employee-form-group select[name="status"] {
+  height: 42px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 40;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+/* === Images inside table === */
+.employee-table img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+}
+
+/* === Responsive adjustments === */
+@media (max-width: 900px) {
+  .employee-form-group {
+    width: 100%;
+  }
+  .employee-container {
+    padding: 16px;
+  }
+  .employee-table th,
+  .employee-table td {
+    padding: 8px;
+    font-size: 13px;
+  }
+  .employee-search {
+    justify-content: flex-start;
+  }
+  .employee-search input {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+/* === Extra Responsive Adjustments for Tablets and Mobile === */
+
+/* For tablets (≤768px) */
+@media (max-width: 768px) {
+  .employee-container {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .employee-header {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .employee-form-group {
+    width: 100%;
+  }
+
+  .employee-search {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+  }
+
+  .employee-search input {
+    width: 100%;
+    margin: 0 0 10px 0;
+  }
+
+  .pagination-info {
+    margin-right: auto;
+    font-size: 12px;
+  }
+
+  .pagination-controls {
+    justify-content: center;
+  }
+
+  .employee-table {
+    font-size: 13px;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* For mobile phones (≤480px) */
+@media (max-width: 480px) {
+  .employee-container {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .employee-header {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .employee-form {
+    flex-direction: column;
+  }
+
+  .employee-form-group {
+    width: 100%;
+  }
+
+  .employee-search {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .employee-search input {
+    width: 100%;
+    margin: 0 0 10px 0;
+  }
+
+  .employee-table th,
+  .employee-table td {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .pagination-info {
+    font-size: 11px;
+    margin-right: auto;
+    text-align: left;
+  }
+
+  .pagination-controls {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .pagination-btn {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+}
