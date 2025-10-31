@@ -17,6 +17,31 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+// Serve employee image (stored as LONGBLOB) as base64
+app.get('/api/employee/:id/image', (req, res) => {
+	const employeeId = req.params.id;
+
+	// Query the employee's image from the database
+	db.query('SELECT image FROM employees WHERE id = ?', [employeeId], (err, results) => {
+		if (err) return res.status(500).json({ error: 'Database error' });
+
+		if (!results.length || !results[0].image) {
+			return res.status(404).json({ error: 'No image found for this employee' });
+		}
+
+		const imgBuffer = results[0].image;
+
+		// You can store the MIME type in the database for accuracy, 
+		// but here we'll default to JPEG
+		const mimeType = 'image/jpeg';
+		const base64Img = imgBuffer.toString('base64');
+
+		// Send the image as base64
+		res.json({ base64: `data:${mimeType};base64,${base64Img}` });
+	});
+});
+
+
 // === Get all employees ===
 router.get("/", async (req, res) => {
   try {
