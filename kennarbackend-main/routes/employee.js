@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // ✅ Serve employee image (stored as LONGBLOB) as base64
-router.get("/:employee_id/image", (req, res) => {
+app.get("/:employee_id/image", (req, res) => {
   const employeeId = req.params.employee_id;
 
   db.query("SELECT image FROM employees WHERE employee_id = ?", [employeeId], (err, results) => {
