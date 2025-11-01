@@ -1,6 +1,7 @@
-// === backend/routes/employee.js ===
 import express from "express";
 import multer from "multer";
+import fs from "fs";
+import path from "path";
 import db from "../config/database.js";
 
 const router = express.Router();
@@ -8,7 +9,7 @@ const router = express.Router();
 // === For image upload ===
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/"); 
+    cb(null, "uploads/"); // store uploaded files in /uploads folder
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
@@ -17,8 +18,8 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// ✅ Serve employee image (stored as LONGBLOB) as base64
-app.get("/:employee_id/image", (req, res) => {
+// === Serve employee image (supports both LONGBLOB and filename) ===
+router.get("/:employee_id/image", (req, res) => {
   const employeeId = req.params.employee_id;
 
   db.query("SELECT image FROM employees WHERE employee_id = ?", [employeeId], (err, results) => {
@@ -31,11 +32,22 @@ app.get("/:employee_id/image", (req, res) => {
       return res.status(404).json({ error: "No image found for this employee" });
     }
 
-    const imgBuffer = results[0].image;
-    const mimeType = "image/jpeg";
-    const base64Img = imgBuffer.toString("base64");
+    const imageData = results[0].image;
 
-    // ✅ Return pure base64 string (frontend adds "data:image/jpeg;base64," prefix)
+    // Case 1: If the 'image' column stores a filename (string)
+    if (typeof imageData === "string") {
+      const imagePath = path.join("uploads", imageData);
+      if (fs.existsSync(imagePath)) {
+        const imgBuffer = fs.readFileSync(imagePath);
+        const base64Img = imgBuffer.toString("base64");
+        return res.json({ base64: base64Img });
+      } else {
+        return res.status(404).json({ error: "Image file not found on server" });
+      }
+    }
+
+    // Case 2: If the 'image' column stores binary data (LONGBLOB)
+    const base64Img = imageData.toString("base64");
     res.json({ base64: base64Img });
   });
 });
